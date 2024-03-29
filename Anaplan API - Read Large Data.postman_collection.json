@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "f11f68af-a19c-400e-ae80-c7d24446e58a",
+		"name": "Anaplan API - Read Large Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25502368"
+	},
+	"item": [
+		{
+			"name": "WIPRO Tenant",
+			"item": [
+				{
+					"name": "1. Anaplan Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"access_token\", \"AnaplanAuthToken \" + jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"client_id\": \"{{client_id}}\",\r\n\"grant_type\": \"refresh_token\", \r\n\"refresh_token\": \"{{refresh_token}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://us1a.app.anaplan.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"us1a",
+								"app",
+								"anaplan",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Initialize large read request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"requestId\", json.viewReadRequest.requestId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"exportType\": \"TABULAR_MULTI_COLUMN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.anaplan.com/2/0/workspaces/{{workspaceId}}/models/{{modelId}}/views/{{viewId}}/readRequests",
+							"protocol": "https",
+							"host": [
+								"api",
+								"anaplan",
+								"com"
+							],
+							"path": [
+								"2",
+								"0",
+								"workspaces",
+								"{{workspaceId}}",
+								"models",
+								"{{modelId}}",
+								"views",
+								"{{viewId}}",
+								"readRequests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Retrieve status of large read request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.anaplan.com/2/0/workspaces/{{workspaceId}}/models/{{modelId}}/views/{{viewId}}/readRequests/{{requestId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"anaplan",
+								"com"
+							],
+							"path": [
+								"2",
+								"0",
+								"workspaces",
+								"{{workspaceId}}",
+								"models",
+								"{{modelId}}",
+								"views",
+								"{{viewId}}",
+								"readRequests",
+								"{{requestId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Download pages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.anaplan.com/2/0/workspaces/{{workspaceId}}/models/{{modelId}}/views/{{viewId}}/readRequests/{{requestId}}/pages/0",
+							"protocol": "https",
+							"host": [
+								"api",
+								"anaplan",
+								"com"
+							],
+							"path": [
+								"2",
+								"0",
+								"workspaces",
+								"{{workspaceId}}",
+								"models",
+								"{{modelId}}",
+								"views",
+								"{{viewId}}",
+								"readRequests",
+								"{{requestId}}",
+								"pages",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Delete read requests",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.anaplan.com/2/0/workspaces/{{workspaceId}}/models/{{modelId}}/views/{{viewId}}/readRequests/{{requestId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"anaplan",
+								"com"
+							],
+							"path": [
+								"2",
+								"0",
+								"workspaces",
+								"{{workspaceId}}",
+								"models",
+								"{{modelId}}",
+								"views",
+								"{{viewId}}",
+								"readRequests",
+								"{{requestId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BT Tenant",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "client_id",
+			"value": "AXzpmRJvbPeWGsdAmpAzw9PJGbi9mGft",
+			"type": "string"
+		},
+		{
+			"key": "refresh_token",
+			"value": "sbei1aBHCPC27vTBslvZGwKCsKmKrAzQXGO43HffEw8GK",
+			"type": "string"
+		},
+		{
+			"key": "workspaceId",
+			"value": "8a81b09d5a0b3c1c015a1eca06aa296d",
+			"type": "string"
+		},
+		{
+			"key": "modelId",
+			"value": "62BA41F3BCF748CAB7040C5EEBF5B4CF",
+			"type": "string"
+		},
+		{
+			"key": "viewId",
+			"value": "209000000000",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "requestId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "modsolWorkspace",
+			"value": "8a81b00e779d68280177abffe9637f07",
+			"type": "string"
+		},
+		{
+			"key": "modsolModel",
+			"value": "EE5DF2474110491B8F81A10F2AE3B7AA",
+			"type": "string"
+		},
+		{
+			"key": "payplanView",
+			"value": "660000000021",
+			"type": "string"
+		}
+	]
+}
