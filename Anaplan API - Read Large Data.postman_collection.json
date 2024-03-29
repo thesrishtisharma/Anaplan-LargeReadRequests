@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "WIPRO Tenant",
+			"name": "Tenant",
 			"item": [
 				{
 					"name": "1. Anaplan Auth",
@@ -215,10 +215,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "BT Tenant",
-			"item": []
 		}
 	],
 	"event": [
