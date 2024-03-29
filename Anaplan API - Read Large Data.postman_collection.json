@@ -244,27 +244,27 @@
 	"variable": [
 		{
 			"key": "client_id",
-			"value": "AXzpmRJvbPeWGsdAmpAzw9PJGbi9mGft",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "refresh_token",
-			"value": "sbei1aBHCPC27vTBslvZGwKCsKmKrAzQXGO43HffEw8GK",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "workspaceId",
-			"value": "8a81b09d5a0b3c1c015a1eca06aa296d",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "modelId",
-			"value": "62BA41F3BCF748CAB7040C5EEBF5B4CF",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "viewId",
-			"value": "209000000000",
+			"value": "",
 			"type": "string"
 		},
 		{
@@ -279,17 +279,17 @@
 		},
 		{
 			"key": "modsolWorkspace",
-			"value": "8a81b00e779d68280177abffe9637f07",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "modsolModel",
-			"value": "EE5DF2474110491B8F81A10F2AE3B7AA",
+			"value": "",
 			"type": "string"
 		},
 		{
 			"key": "payplanView",
-			"value": "660000000021",
+			"value": "",
 			"type": "string"
 		}
 	]
